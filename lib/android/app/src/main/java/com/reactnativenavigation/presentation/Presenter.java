@@ -137,21 +137,30 @@ public class Presenter {
         }
     }
 
-    private void mergeStatusBarVisible(View view, Bool visible, Bool drawBehind) {
+  private void mergeStatusBarVisible(View view, Bool visible, Bool drawBehind) {
         if (visible.hasValue()) {
-            int flags = view.getSystemUiVisibility();
+            
             if (visible.isTrue()) {
+                int flags = view.getSystemUiVisibility();
                 flags &= ~View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN & ~View.SYSTEM_UI_FLAG_FULLSCREEN;
+                view.setSystemUiVisibility(flags);
+                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+
             } else {
-                flags |= View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN;
+//                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+//                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE);
+                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+//                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+
+                // flags |= View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN;
             }
-            view.setSystemUiVisibility(flags);
         } else if (drawBehind.hasValue()) {
             if (drawBehind.isTrue()) {
-                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             } else {
-                view.setSystemUiVisibility(~View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+                view.setSystemUiVisibility(~View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             }
         }
-    }
 }
