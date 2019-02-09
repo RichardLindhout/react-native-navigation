@@ -143,7 +143,7 @@ public class Presenter {
             if (visible.isTrue()) {
                 flags &= ~View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN & ~View.SYSTEM_UI_FLAG_FULLSCREEN;
             } else {
-                flags |= View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN;
+                flags = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
             }
             view.setSystemUiVisibility(flags);
         } else if (drawBehind.hasValue()) {
